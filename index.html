@@ -5,10 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <script src="main.js"></script>
-    <title>Document</title>
+    <script async src="main.js"></script>
+    <title>Library</title>
 </head>
 <body>
-    
+<div class="container">
+    <form method="post" name="newBook" action="" class="inputs">
+        <div>
+            <label for="title">Book title</label>
+            <input type="text" name="title" id="title" required>
+        </div>
+        <div>
+            <label for="author">Book author</label>
+            <input type="text" name="author"id="author" required>
+        </div>
+        <div>
+            <label for="pagers">How many pages?</label>
+            <input type="number" name="pages" id="pages" required>
+        </div>
+        <div>
+            <label for="read">Have you read already?</label>
+            <input type="text" name="read" id="read" required>
+        </div>
+        <div>
+            <button type="submit" value="send" name="submit" id="submit">Add book</button>
+        </div>
+    </form>
+    <div class="main" id="library">
+    </div>
+</div>
 </body>
 </html>
