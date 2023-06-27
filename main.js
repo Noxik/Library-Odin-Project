@@ -3,10 +3,37 @@ let newBookInLibrary = document.createElement("div");
 let titleInput = document.getElementById("title")
 let authorInput = document.getElementById("author")
 let pagesInput = document.getElementById("pages")
-let readInput = document.getElementById("read")
+let myForm = document.querySelector("#myForm");
+let readInput = document.getElementsByName("read")
+
 
 let myLibrary = [];
+let validation
+let checkIfNewBook
+let isRead
 
+let addBookBtn = document.getElementById("addBook")
+addBookBtn.addEventListener("click", () => {
+    myForm.style.display = "block"
+})
+
+/* ACTION AFTER SUBMIT FORM */
+document.getElementById("submit").addEventListener("click", () => {
+
+// bookTitleValidation();    
+inputsValidation();
+
+if (validation) {
+    read();
+addBookToLibrary();
+addBooksToDiv();
+
+clearInputs();
+
+validation = false        
+}});
+
+/* FUNCTIONS */
 function Book(title, author, pages, read) {
     this.title = title
     this.author = author
@@ -17,28 +44,8 @@ function Book(title, author, pages, read) {
     }
 }
 
-let validation
-let checkIfNewBook
-/* ACTION AFTER SUBMIT FORM */
-document.getElementById("submit").addEventListener("click", () => {
-
-// bookTitleValidation();    
-inputsValidation();
-
-if (validation) {
-addBookToLibrary();
-addBooksToDiv()
-
-let allInputs = document.querySelectorAll("input");
-    for (let i=0; i<allInputs.length; i++) {
-        allInputs[i].value = "";
-        }
-validation = false        
-}});
-
-/* FUNCTIONS */
 function addBookToLibrary() {
-    myLibrary.push(new Book(titleInput.value, authorInput.value, pagesInput.value, readInput.value))
+    myLibrary.push(new Book(titleInput.value, authorInput.value, pagesInput.value, isRead))
    };
 
 function addBooksToDiv() {
@@ -93,6 +100,23 @@ function inputsValidation() {
         } else {
             validation = true;
         }
+    }
+
+function clearInputs() {
+    myForm.style.display = "none";    //modal hide
+    let allInputs = document.querySelectorAll("input");
+        for (let i=0; i<allInputs.length; i++) {
+            allInputs[i].value = "";
+            readInput[i].checked = false;
+            }
+           
+    }
+    
+function read() {
+        for (let i=0; i<readInput.length; i++) {
+         if (readInput[i].checked) {
+            isRead = readInput[i].value}
+                }
     }
 
 function deleteBtn() {

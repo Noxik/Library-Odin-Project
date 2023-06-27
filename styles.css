@@ -4,28 +4,49 @@
     background-color: hsl(271, 100%, 90%);
 }
 
+#myForm {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: brown;
+    padding: 10px 20px
+}
+
+#radios {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .inputs {
-    display: grid;
+  display: grid;
+}
+
+.inputs input {
+    margin-bottom: 1rem;
 }
 
 .main {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 300px);
-    background-color: aqua;
-    width: 100%;
-    gap: 15px;
+
 
 }
 
-.main > div {
+#library {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: aqua;
+    width: 100%;
+    gap: 15px;
+}
+
+#library > div {
     background-color: antiquewhite;
     border-radius: 24px;
     padding: 16px 20px;
     display: grid;
     grid-template-columns: 1fr auto;
 }
-
-
 
 .delBtn {
     grid-column: 2;
