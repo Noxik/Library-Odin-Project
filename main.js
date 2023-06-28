@@ -133,9 +133,17 @@ function deleteBtn() {
     // here we take first word from our button id to compare with library titles
     let titleFromId = (this.id).split('_');
 
+
     // here we try to find title in myLibrary array  equal to id delete button
     const indexObject = myLibrary.findIndex(key => {
-            return key.title === titleFromId[0]
+
+        /* check if we found correct book becasue we can have the same title for many books, 
+        but we stop adding book to library if title and author is the same, 
+        so we need to check if title found by id delete button belong to correct author */
+        if (key.author === titleFromId[1]) {;
+        //we found author in Library so now we can delete title with same "key"            
+        return key.title === titleFromId[0];}
+            
             });
    
     // we delete that index from array myLibrary      
