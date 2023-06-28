@@ -19,18 +19,15 @@ addBookBtn.addEventListener("click", () => {
 
 /* ACTION AFTER SUBMIT FORM */
 document.getElementById("submit").addEventListener("click", () => {
-
-// bookTitleValidation();    
+  
 inputsValidation();
 
 if (validation) {
-    read();
+read();
 addBookToLibrary();
 addBooksToDiv();
+clearInputs();      
 
-clearInputs();
-
-validation = false        
 }});
 
 /* FUNCTIONS */
@@ -77,14 +74,11 @@ pagesInput.onfocus = function() {
 //    let isBookInLibraryAuthor = myLibrary.some(inputBook => );
     if (isBookInLibraryTitle) {
         alert("this book is already in your library! Change title");
-        document.getElementById("submit").disabled = true;
         titleInput.value = "";
         authorInput.value = "";
-       
-    } else {
-        document.getElementById("submit").disabled = false;
+    } 
     }
-}
+
 
 function inputsValidation() {
         if (titleInput.value == "") {
@@ -95,7 +89,7 @@ function inputsValidation() {
         else if (pagesInput.value == "") {
             alert("fill pages input")
         }
-        else if (readInput.value == "") {
+        else if (readInput[0].checked === false && readInput[1].checked === false) {
             alert("fill read input")
         } else {
             validation = true;
@@ -104,6 +98,8 @@ function inputsValidation() {
 
 function clearInputs() {
     myForm.style.display = "none";    //modal hide
+    isRead = undefined;
+    validation = false;
     let allInputs = document.querySelectorAll("input");
         for (let i=0; i<allInputs.length; i++) {
             allInputs[i].value = "";
