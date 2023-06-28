@@ -86,7 +86,7 @@ pagesInput.onfocus = function() {
     let isBookInLibraryTitle = myLibrary.some(inputBook => inputBook.title == document.getElementById("title").value && inputBook.author == document.getElementById("author").value);
 //    let isBookInLibraryAuthor = myLibrary.some(inputBook => );
     if (isBookInLibraryTitle) {
-        alert("this book is already in your library! Change title");
+        alert("This book is already in your library!!");
         titleInput.value = "";
         authorInput.value = "";
     } 
@@ -130,56 +130,15 @@ function deleteBtn() {
     // here we remove div after click "X" button
         this.parentNode.remove();
 
+    // here we take first word from our button id to compare with library titles
+    let titleFromId = (this.id).split('_');
+
     // here we try to find title in myLibrary array  equal to id delete button
     const indexObject = myLibrary.findIndex(key => {
-            return key.title === this.id;
+            return key.title === titleFromId[0]
             });
-                  
+   
     // we delete that index from array myLibrary      
         myLibrary.splice(indexObject, 1);
         console.log(myLibrary)
     }
-
-
-
-/* TEST */
-    let testLibrary = [
-        {
-            "title": "The Hobbit",
-            "author": "J.R.R Tolkien",
-            "pages": 295,
-            "read": "not read yet"
-        }, 
-        {
-            "title": "xyz",
-            "author": "nieznany",
-            "pages": 2,
-            "read": "yup"
-        },
-        {
-            "title": "Lalka",
-            "author": "Bolek Prus",
-            "pages": 200,
-            "read": "read"
-        }
-        ]
-        const goTest = function() {
-        testLibrary.forEach(book => {
-            let div = document.createElement("div");
-            let title = document.createElement("h1");
-            let author = document.createElement("h2");
-            let pages = document.createElement("p");
-            let read = document.createElement("p");
-            let x = document.createElement("button");
-            title.textContent = book.title;
-            author.textContent = book.author;
-            pages.textContent = `${book.pages} pages`;
-            read.textContent = book.read;
-                    x.textContent = "X";
-        x.classList.add("delete");
-        div.append(title, author, pages, read, x);
-        library.appendChild(div);
-        deletes = document.querySelectorAll(".delete");
-        })
-        }
-        
