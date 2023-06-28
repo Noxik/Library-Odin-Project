@@ -17,6 +17,12 @@ addBookBtn.addEventListener("click", () => {
     myForm.style.display = "block"
 })
 
+/* Form closing after button X click */
+document.getElementById("formCloseBtn").addEventListener("click", () => {
+    myForm.style.display = "none";
+    clearInputs()
+})
+
 /* ACTION AFTER SUBMIT FORM */
 document.getElementById("submit").addEventListener("click", () => {
   
@@ -55,9 +61,16 @@ function addBooksToDiv() {
         let read = document.createElement("p");
         let x = document.createElement("button");
         title.textContent = book.title;
-        author.textContent = book.author;
-        pages.textContent = book.pages;
-        read.textContent = book.read;
+        author.textContent = "by " + book.author;
+        pages.textContent = book.pages + " pages";
+        
+        if (book.read === "yes") {
+        read.textContent = "Read already! :)"
+        } else {
+            read.textContent = "not read :("
+        }
+// above replace: read.textContent = "Read?  " + book.read;
+        
         x.textContent = "X";
         x.classList.add("delBtn");
         x.setAttribute('id', (`${book.title}_${book.author}_${book.pages}`));
@@ -79,18 +92,17 @@ pagesInput.onfocus = function() {
     } 
     }
 
-
 function inputsValidation() {
         if (titleInput.value == "") {
-            alert("fill title input")} 
+            console.log("fill title input")} 
         else if (authorInput.value == "") {
-            alert("fill author input")
+            console.log("fill author input")
         }
         else if (pagesInput.value == "") {
-            alert("fill pages input")
+            console.log("fill pages input")
         }
         else if (readInput[0].checked === false && readInput[1].checked === false) {
-            alert("fill read input")
+            console.log("fill read input")
         } else {
             validation = true;
         }
@@ -104,8 +116,7 @@ function clearInputs() {
         for (let i=0; i<allInputs.length; i++) {
             allInputs[i].value = "";
             readInput[i].checked = false;
-            }
-           
+            }         
     }
     
 function read() {
@@ -168,7 +179,6 @@ function deleteBtn() {
         x.classList.add("delete");
         div.append(title, author, pages, read, x);
         library.appendChild(div);
-
         deletes = document.querySelectorAll(".delete");
         })
         }

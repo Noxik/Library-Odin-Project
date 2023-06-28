@@ -1,7 +1,52 @@
-.container {
-    margin: auto;
-    width: 80vw;
-    background-color: hsl(271, 100%, 90%);
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&display=swap');
+
+:root {
+    font-size: 1rem;
+    font-family: 'Kanit', sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #fffafa;
+}
+
+p {
+    margin: 0.5rem 0;
+}
+
+label {
+    font-size: 1.25rem;
+}
+
+#firstLabel {
+    display: flex;
+    justify-content: space-between;
+}
+
+#formCloseBtn {
+    position: relative;
+    bottom: 12px;
+    left: 8px;
+}
+
+#addBook {
+    margin-left: 2rem;
+    padding: 16px 32px;
+    border-radius: 48px;
+    background-color: #e9ffe0;
+    border: 2px solid green;
+}
+
+#addBook:hover {
+    background-color: #c3ffac;
+    cursor: pointer;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    padding: 0 2%;
+    background-color: #f0f8ff;
 }
 
 #myForm {
@@ -10,8 +55,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: brown;
-    padding: 10px 20px
+    background: radial-gradient(circle, rgba(250,235,215,1) 0%, rgba(255,250,250,1) 72%, rgba(240,248,255,1) 96%);
+    padding: 2% 3%;
+    border-radius: 20px;
+    -webkit-box-shadow: 5px 5px 20px 4px rgba(66, 68, 90, 0.4);
+    -moz-box-shadow: 5px 5px 20px 4px rgba(66, 68, 90, 0.4);
+    box-shadow: 5px 5px 20px 4px rgba(66, 68, 90, 0.4);
 }
 
 #radios {
@@ -27,29 +76,36 @@
     margin-bottom: 1rem;
 }
 
-.main {
-
-
-}
-
 #library {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    background-color: aqua;
-    width: 100%;
     gap: 15px;
+    padding: 1% 2%;
 }
 
 #library > div {
-    background-color: antiquewhite;
+    background-color: #faebd7;
     border-radius: 24px;
-    padding: 16px 20px;
+    padding: 20px 30px;
     display: grid;
     grid-template-columns: 1fr auto;
+}
+
+#library p {
+    justify-self: center;
 }
 
 .delBtn {
     grid-column: 2;
     grid-row: 1/5;
     height: 30px;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+.delBtn:hover {
+    background-color: lightgrey;
+    cursor: pointer;
 }

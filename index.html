@@ -12,16 +12,14 @@
 <div class="container">
     <div id="myForm">
     <form method="post" name="newBook" action="" class="inputs">
-   
-            <label for="title">Book title</label>
+            <div id="firstLabel">
+                <label for="title">Book title</label><button class="delBtn" id="formCloseBtn">X</button>
+            </div>
             <input type="text" name="title" id="title" required>
-     
             <label for="author">Book author</label>
             <input type="text" name="author"id="author" required>
-        
             <label for="pagers">How many pages?</label>
             <input type="number" name="pages" id="pages" required>
-        
             <label for="read">Have you read already?</label>
             <div id="radios">
                 <label><input type="radio" name="read" id="readYes" value="yes" required> Yes</label>
@@ -32,10 +30,13 @@
     </form>
 </div>
     <div class="main">
-    <h1>This is my Library</h1>
-    <button id="addBook">Add new book</button>
-    <div id="library"></div>
-       
+        <div class="head">
+            <h1>This is my Library</h1>
+            <button id="addBook">Add new book</button>
+        </div>        
+        <div id="library">
+            <!-- here divs appear-->
+        </div>
     </div>
 </div>
 </body>
