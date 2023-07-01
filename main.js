@@ -5,7 +5,7 @@ let authorInput = document.getElementById("author")
 let pagesInput = document.getElementById("pages")
 let myForm = document.querySelector("#myForm");
 let readInput = document.getElementsByName("read")
-
+let mainContainer = document.querySelector(".main")
 
 let myLibrary = [];
 let validation
@@ -14,8 +14,29 @@ let isRead
 
 let addBookBtn = document.getElementById("addBook")
 addBookBtn.addEventListener("click", () => {
-    myForm.style.display = "block"
+    myForm.style.display = "block";
+ 
+    // hide background when form modal is open
+    mainContainer.style.cssText = "position: relative; z-index: -1; filter: blur(10px)"
+ 
+    // add event which close Form after click outside it   
+    document.onclick = function(e){
+       console.log('user clicked: ', event.target.id);
+    if (!myForm.contains(e.target)) {
+        myForm.style.display = 'none';
+      
+    }
+    if (e.target.id == "addBook") {
+        myForm.style.display = "block"
+    }
+    // after click outside form background is visible and inputs clear - so it works like press X button
+    if (myForm.style.display == "none") {
+        mainContainer.style.cssText = ""
+        clearInputs()
+    }
+    };
 })
+
 
 /* Form closing after button X click */
 document.getElementById("formCloseBtn").addEventListener("click", () => {
@@ -78,6 +99,9 @@ function addBooksToDiv() {
         library.appendChild(div);
         /* adding id to a delete button for easier solution */
         document.getElementById(`${book.title}_${book.author}_${book.pages}`).addEventListener("click", deleteBtn)   
+       
+        // make background visible again
+        mainContainer.style.cssText = " "
     })
     }
 
@@ -137,14 +161,13 @@ function deleteBtn() {
     // here we try to find title in myLibrary array  equal to id delete button
     const indexObject = myLibrary.findIndex(key => {
 
-        /* check if we found correct book becasue we can have the same title for many books, 
+        /* check if we found correct book because we can have the same title for many books, 
         but we stop adding book to library if title and author is the same, 
         so we need to check if title found by id delete button belong to correct author */
         if (key.author === titleFromId[1]) {;
         //we found author in Library so now we can delete title with same "key"            
-        return key.title === titleFromId[0];}
-            
-            });
+        return key.title === titleFromId[0];} 
+    });
    
     // we delete that index from array myLibrary      
         myLibrary.splice(indexObject, 1);
