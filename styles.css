@@ -10,10 +10,6 @@ body {
     background-color: #fffafa;
 }
 
-h1 {
-    margin-right: 2rem;
-}
-
 p {
     margin: 0.5rem 0;
 }
@@ -47,10 +43,17 @@ label {
 }
 
 .head {
-    display: flex;
-    align-items: center;
+    display:grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 2rem;
     padding: 0 2%;
     background-color: #f0f8ff;
+    align-items: center;
+    justify-items: end
+}
+
+.head p {
+    text-align: center;
 }
 
 #myForm {
@@ -95,6 +98,7 @@ label {
     padding: 20px 30px;
     display: grid;
     grid-template-columns: 1fr auto;
+    justify-items: center;
 }
 
 #library p {
@@ -115,3 +119,4 @@ label {
     background-color: lightgrey;
     cursor: pointer;
 }
+

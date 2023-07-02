@@ -21,7 +21,6 @@ addBookBtn.addEventListener("click", () => {
  
     // add event which close Form after click outside it   
     document.onclick = function(e){
-       console.log('user clicked: ', event.target.id);
     if (!myForm.contains(e.target)) {
         myForm.style.display = 'none';
       
@@ -37,7 +36,6 @@ addBookBtn.addEventListener("click", () => {
     };
 })
 
-
 /* Form closing after button X click */
 document.getElementById("formCloseBtn").addEventListener("click", () => {
     myForm.style.display = "none";
@@ -45,16 +43,14 @@ document.getElementById("formCloseBtn").addEventListener("click", () => {
 })
 
 /* ACTION AFTER SUBMIT FORM */
-document.getElementById("submit").addEventListener("click", () => {
-  
-inputsValidation();
+document.getElementById("submit").addEventListener("click", () => {  
+    inputsValidation();
 
-if (validation) {
-read();
-addBookToLibrary();
-addBooksToDiv();
-clearInputs();      
-
+    if (validation) {
+    read();
+    addBookToLibrary();
+    addBooksToDiv();
+    clearInputs();  
 }});
 
 /* FUNCTIONS */
@@ -81,29 +77,44 @@ function addBooksToDiv() {
         let pages = document.createElement("p");
         let read = document.createElement("p");
         let x = document.createElement("button");
+        let switchBtn = document.createElement("button");
+                
+        div.setAttribute('id',(`${book.title}-${book.author}-${book.pages}`))
         title.textContent = book.title;
         author.textContent = "by " + book.author;
         pages.textContent = book.pages + " pages";
         
+        // below replace: read.textContent = "Read?  " + book.read;
         if (book.read === "yes") {
-        read.textContent = "Read already! :)"
+        read.textContent = "Read already! :)";
+        div.style.border = "2px solid green"
+        read.style.color = "green"
         } else {
-            read.textContent = "not read :("
+            read.textContent = "not read :(";
+            div.style.border = "2px solid red";
+            read.style.color = "red"
         }
-// above replace: read.textContent = "Read?  " + book.read;
-        
+
         x.textContent = "X";
         x.classList.add("delBtn");
         x.setAttribute('id', (`${book.title}_${book.author}_${book.pages}`));
-        div.append(title, author, pages, read, x);
+        
+        switchBtn.setAttribute('id', (`${book.title}+${book.author}+${book.pages}`));
+        switchBtn.textContent = "Read / Unread"
+    //    document.getElementsByClassName("switch").addEventListener("click", switchRead)
+
+
+        div.append(title, author, pages, read, x, switchBtn);
         library.appendChild(div);
         /* adding id to a delete button for easier solution */
         document.getElementById(`${book.title}_${book.author}_${book.pages}`).addEventListener("click", deleteBtn)   
-       
+        document.getElementById(`${book.title}+${book.author}+${book.pages}`).addEventListener("click", switchRead)   
+        
         // make background visible again
         mainContainer.style.cssText = " "
+       
     })
-    }
+}
 
 /* when input pages is active we check if book is already in myLibrary (title/author) */
 pagesInput.onfocus = function() {
@@ -114,7 +125,7 @@ pagesInput.onfocus = function() {
         titleInput.value = "";
         authorInput.value = "";
     } 
-    }
+}
 
 function inputsValidation() {
         if (titleInput.value == "") {
@@ -155,8 +166,7 @@ function deleteBtn() {
         this.parentNode.remove();
 
     // here we take first word from our button id to compare with library titles
-    let titleFromId = (this.id).split('_');
-
+    let titleFromId = (this.parentNode.id).split('-');
 
     // here we try to find title in myLibrary array  equal to id delete button
     const indexObject = myLibrary.findIndex(key => {
@@ -172,4 +182,22 @@ function deleteBtn() {
     // we delete that index from array myLibrary      
         myLibrary.splice(indexObject, 1);
         console.log(myLibrary)
+    }
+
+function switchRead() {
+    let titleFromId = (this.parentNode.id).split('-');
+    const indexInLibrary = myLibrary.findIndex(key => {
+    
+    if (key.author === titleFromId[1]) {;
+    return key.title === titleFromId[0];} 
+    }); 
+       
+    if (myLibrary[indexInLibrary].read === "yes") {
+        myLibrary[indexInLibrary].read = "no"
+    } else {
+        myLibrary[indexInLibrary].read = "yes"
+    }
+    
+    // after we change object Library property "read" we must update our Div with books
+    addBooksToDiv()
     }
