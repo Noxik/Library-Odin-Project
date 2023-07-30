@@ -53,7 +53,19 @@ document.getElementById("submit").addEventListener("click", () => {
     clearInputs();  
 }});
 
-/* FUNCTIONS */
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title
+        this.author = author
+        this.pages = pages
+        this.read = read
+    }
+    info() {
+        return this.title + " by " + this.author + ", " + this.pages + " pages, " + this.read
+    }
+}
+
+ /* change constructor into class
 function Book(title, author, pages, read) {
     this.title = title
     this.author = author
@@ -62,8 +74,9 @@ function Book(title, author, pages, read) {
     this.info = function() {
         return this.title + " by " + this.author + ", " + this.pages + " pages, " + this.read
     }
-}
+}*/
 
+// FUNCTIONS
 function addBookToLibrary() {
     myLibrary.push(new Book(titleInput.value, authorInput.value, pagesInput.value, isRead))
    };
