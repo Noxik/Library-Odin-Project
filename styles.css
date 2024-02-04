@@ -43,13 +43,24 @@ label {
 }
 
 .head {
-    display:grid;
-    grid-template-columns: auto auto 1fr;
-    gap: 2rem;
+    display:flex;
     padding: 0 2%;
     background-color: #f0f8ff;
     align-items: center;
-    justify-items: end
+    justify-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 480px) {
+  .head {
+    flex-direction: column;
+  }
+    .head div {
+        display: grid;
+  justify-self: space-between;
+  grid-template-columns: 3fr 1fr;
+  justify-items: end;
+    }
 }
 
 .head p {
